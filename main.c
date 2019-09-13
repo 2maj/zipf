@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include<stdlib.h>
+#include<ctype.h>
 
 const int A=65;
 const int Z=90;
@@ -16,13 +18,13 @@ int check_in_dico(char**, char[],int);
 //void display_frequence(int *, int);
 void sort(char**, int *, int,int);
 void tolowerString(char *);
+void free_memory(char**, int);
 
 
-int main(void) {
+int main(int argc, char* argv[]) {
   char entre[100];
   printf("La phrase \n");
   gets (entre);
-  int frq;
   int nbr = n_words(entre);
   int*tab;
   tab=(int*)malloc((nbr+1)*sizeof(int));
@@ -44,7 +46,7 @@ int main(void) {
   free_memory(dico, nbr);
   free(tab);
    free(dico);
-   return EXIT_SUCCESS;
+   return 789;
 
 }
 
@@ -75,8 +77,7 @@ int check_in_dico(char**dico, char mot[],int nbr){
 
 void tolowerString(char *letter){
     int i, index, ascii;
-    char low;
-    for(i=0; i<strlen(letter); i++){
+    for(i=0; i<(int)strlen(letter); i++){
         ascii=letter[i];
         if(ascii>=A && ascii <=Z){
             //maj
@@ -92,7 +93,7 @@ void add_dico(char**dico, char *entre,int nbr,int longest){
     char *str;
     str = (char*)malloc((strlen(entre)+1)*sizeof(char));
     strcpy(str,entre);
-   const char s[15] = "- ,;_\\%\:/*^£$?.!'\\";
+   const char s[22] = "- ,;_\\%/*^Â£$?.!'\\";
    char *token;
 
    token = strtok(str, s);
@@ -106,7 +107,7 @@ void add_dico(char**dico, char *entre,int nbr,int longest){
        if(strlen(token)!=0 && check_in_dico(dico,token,nbr)>=nbr){
             dico[i] = (char *)malloc((strlen(token)+1) * sizeof(char));
 	        strcpy(dico[i], token);
-	        printf("%s\n",dico[i]);
+	        //printf("%s\n",dico[i]);
        }
       token = strtok(NULL, s);
    }
@@ -159,8 +160,8 @@ void sort(char**dico, int *tab, int nbr,int longest){
 
 int n_words(char entree[]){
     int n = 0;
-    for (int i = 0; i<=strlen(entree);i++){
-        if (entree[i] == ' '||entree[i] == '\''||entree[i] == '?'||entree[i] == '!'||entree[i] == ','){
+    for (int i = 0; i<=(int)strlen(entree);i++){
+        if (entree[i] == ' '||entree[i] == '\''||entree[i] == '?'||entree[i] == '!'||entree[i] == ','||entree[i] == ':'){
             n += 1;
             i++;
         }
@@ -172,7 +173,7 @@ int longest(char entree[]){
     int i = 0;
     int n = 0;
     int max = 0;
-    while (i<=strlen(entree)){
+    while (i<=(int)strlen(entree)){
         if( entree[i] == ' ' || entree[i] == '\0'){
             if (n>max){
                 max = n;
@@ -192,11 +193,10 @@ void frequence (int*tab,char**dico, char*entre, int nbr){
         char *str;
         str = (char*)malloc((strlen(entre)+1)*sizeof(char));
         strcpy(str,entre);
-       const char s[15] = "- ,:/*^£$?.!'";
+       const char s[15] = "- ,:/*^Â£$?.!'";
        char *token;
        token = strtok(str, s);
-       int i =0;
-       int j,position;
+       int position;
 
        /* walk through other tokens */
        while(token != NULL ) {
