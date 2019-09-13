@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
 
   frequence(tab,dico, entre, nbr);
 
-  //sort(dico,tab,nbr,lgst);
+  sort(dico,tab,nbr,lgst);
   display(dico,tab, nbr);
   //display_frequence(tab, nbr);
   free_memory(dico, nbr);
@@ -213,5 +213,3 @@ void frequence (int*tab,char**dico, char*entre, int nbr){
        }
         free(str);
        }
-
-
