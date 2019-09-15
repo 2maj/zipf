@@ -1,1 +1,1 @@
-# zipf
+# Zipf's law
