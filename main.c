@@ -142,7 +142,9 @@ void add_dico(char ** dico, char * entre, int nbr, int longest) {
 void display(char ** dico, int * tab, int nbr) {
   int i;
   printf("mot:  | frequence: \n");
-  for (i = 0; i < nbr + 1; i++) {
+  for (i = 0; i <= nbr + 1; i++) {
+      if(tab[i]==0){
+      tab[i]+=1;}
     if (strlen(dico[i]) != 0) {
       printf("%s | %d\n", dico[i], tab[i]);
 
@@ -165,7 +167,6 @@ void sort(char ** dico, int * tab, int nbr, int longest) {
   char * temp;
   temp = (char * ) malloc((longest + 1) * sizeof(char));
 
-  printf("mot:            frequence:  \n");
   for (i = 0; i < nbr; i++) {
     for (j = i + 1; j < nbr; j++) {
       if (tab[j] > tab[i]) {
