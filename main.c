@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
 
 const int A=65;
 const int Z=90;
 const int MINA = 97;
 const int MINZ = 122;
+
 
 void scan(char*);
 int n_words(char[]);
@@ -16,14 +19,34 @@ int check_in_dico(char**, char[],int);
 //void display_frequence(int *, int);
 void sort(char**, int *, int,int);
 void tolowerString(char *);
+FILE* open_file(FILE **file, char * name){
+    file = fopen(name, "r");
+    if(!file){
+        printf("Error ! \n");
+    }else{
+        printf("Success ! \n");
+    }
+    return file;
+}
 
 
 int main(void) {
   char entre[100];
-  printf("La phrase \n");
-  gets (entre);
+  char *text;
+  int length=0;
+
+  char name[] ="example.c";
+  FILE *fptr;
+  fptr = open_file(fptr, name);
+  fgets(entre, 1048 , fptr);
+  printf("%s \n", entre);
+  free(text);
+  fclose(fptr);
+  //printf("La phrase \n");
+  //gets (entre);
   int frq;
-  int nbr = n_words(entre);
+
+  /*int nbr = n_words(entre);
   int*tab;
   tab=(int*)malloc((nbr+1)*sizeof(int));
   int lgst = longest(entre);
@@ -44,7 +67,8 @@ int main(void) {
   free_memory(dico, nbr);
   free(tab);
    free(dico);
-   return EXIT_SUCCESS;
+   */
+   return 789;
 
 }
 
@@ -106,7 +130,7 @@ void add_dico(char**dico, char *entre,int nbr,int longest){
        if(strlen(token)!=0 && check_in_dico(dico,token,nbr)>=nbr){
             dico[i] = (char *)malloc((strlen(token)+1) * sizeof(char));
 	        strcpy(dico[i], token);
-	        printf("%s\n",dico[i]);
+	        //printf("%s\n",dico[i]);
        }
       token = strtok(NULL, s);
    }
