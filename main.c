@@ -113,22 +113,61 @@ void add_dico(char**dico, char *entre,int nbr,int longest){
    free(str);
 }
 
+<<<<<<< HEAD
 void display(char** dico,int*tab, int nbr){
     int i;
     printf("mot:  | frequence: \n");
     for(i=0; i<nbr+1; i++){
         if(strlen(dico[i]) !=0){
             printf("%s | %d\n", dico[i], tab[i]);
+=======
+void display(char ** dico, int * tab, int nbr) {
+  int i;
+  printf("mot:  | frequence: \n");
+  for (i = 0; i <= nbr + 1; i++) {
+      if(tab[i]==0){
+      tab[i]+=1;}
+    if (strlen(dico[i]) != 0) {
+      printf("%s | %d\n", dico[i], tab[i]);
+>>>>>>> 7942511dc28c7c57541b0afff0f13e2328bf785d
 
         }
     }
     printf("\n");
 }
 
+<<<<<<< HEAD
 void display_frequence(int *tab, int nbr){
     int i;
     for(i=0; i<nbr; i++){
         printf("%d ", tab[i]);
+=======
+void display_frequence(int * tab, int nbr) {
+  int i;
+  for (i = 0; i < nbr; i++) {
+    printf("%d ", tab[i]);
+  }
+}
+
+void sort(char ** dico, int * tab, int nbr, int longest) {
+  int i;
+  int j;
+  int tmp;
+  char * temp;
+  temp = (char * ) malloc((longest + 1) * sizeof(char));
+
+  for (i = 0; i < nbr; i++) {
+    for (j = i + 1; j < nbr; j++) {
+      if (tab[j] > tab[i]) {
+        strcpy(temp, dico[i]);
+        strcpy(dico[i], dico[j]);
+        strcpy(dico[j], temp);
+        tmp = tab[i];
+        tab[i] = tab[j];
+        //strcpy(temp,dico[i]);
+        tab[j] = tmp;
+      }
+>>>>>>> 7942511dc28c7c57541b0afff0f13e2328bf785d
     }
 }
 
